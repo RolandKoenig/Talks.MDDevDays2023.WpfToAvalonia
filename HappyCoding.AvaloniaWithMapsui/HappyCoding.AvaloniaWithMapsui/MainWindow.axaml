@@ -1,0 +1,44 @@
+<ext:MvvmWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
+        xmlns:filesModule="clr-namespace:HappyCoding.AvaloniaWithMapsui.FilesModule.Views;assembly=HappyCoding.AvaloniaWithMapsui.FilesModule"
+        xmlns:mapsModule="clr-namespace:HappyCoding.AvaloniaWithMapsui.MapsModule.Views;assembly=HappyCoding.AvaloniaWithMapsui.MapsModule"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="HappyCoding.AvaloniaWithMapsui.MainWindow"
+        ExtendClientAreaToDecorationsHint="True"
+        Title="HappyCoding.AvaloniaWithMapsui">
+    <ext:MainWindowFrame>
+        <ext:MainWindowFrame.CustomTitleArea>
+            <TextBlock Text="HappyCoding.AvaloniaWithMapsui" />
+        </ext:MainWindowFrame.CustomTitleArea>
+        <ext:MainWindowFrame.MainContentArea>
+            <DockPanel LastChildFill="True">
+                <Menu DockPanel.Dock="Top">
+                    <MenuItem Header="Themes">
+                        <MenuItem Header="Light"
+                                  Click="OnMnuSetThemeLight_Click" />
+                        <MenuItem Header="Dark"
+                                  Click="OnMnuSetThemeDark_Click" />
+                    </MenuItem>
+                </Menu>
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250" />
+                        <ColumnDefinition Width="3" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <filesModule:LoadedGpxFilesView Grid.Column="0" />
+                    
+                    <GridSplitter Grid.Column="1"
+                                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    
+                    <mapsModule:MapsView Grid.Column="2" />
+                </Grid>
+            </DockPanel>
+        </ext:MainWindowFrame.MainContentArea>
+    </ext:MainWindowFrame>
+</ext:MvvmWindow>

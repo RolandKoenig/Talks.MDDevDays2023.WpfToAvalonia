@@ -1,0 +1,70 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:HappyCoding.AvaloniaAppWithDataGrid.Views"
+             xmlns:firlibpropgrid="clr-namespace:FirLib.Avalonia.PropertyGridControl;assembly=FirLib.Avalonia.PropertyGridControl"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="HappyCoding.AvaloniaAppWithDataGrid.Views.DefaultView">
+    <UserControl.DataContext>
+        <local:DefaultViewModel />
+    </UserControl.DataContext>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400*" />
+            <ColumnDefinition Width="3" />
+            <ColumnDefinition Width="600" />
+        </Grid.ColumnDefinitions>
+        
+        <DataGrid Grid.Column="0" 
+                  x:Name="CtrlDataGrid"
+                  Items="{Binding Path=Items}"
+                  SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}"
+                  SelectionMode="Single"
+                  AutoGenerateColumns="False"
+                  CanUserResizeColumns="True"
+                  CanUserReorderColumns="True"
+                  CanUserSortColumns="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name"
+                                    Binding="{Binding Path=Name}"/>
+                <DataGridTextColumn Header="PostalZip"
+                                    Binding="{Binding Path=PostalZip}" />
+                <DataGridTextColumn Header="Address"
+                                    Binding="{Binding Path=Address}" />
+                <DataGridTextColumn Header="Country"
+                                    Binding="{Binding Path=Country}" />
+                <DataGridTextColumn Header="Region"
+                                    Binding="{Binding Path=Region}" />
+
+                <DataGridCheckBoxColumn Header="Status"
+                                        Binding="{Binding Path=Status}" />
+
+                <DataGridTemplateColumn Header="BirthDate"
+                                        SortMemberPath="BirthDate"
+                                        Width="150">
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <CalendarDatePicker SelectedDate="{Binding Path=BirthDate}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=BirthDate, StringFormat={}{0:dd-MM-yyyy}}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <GridSplitter Grid.Column="1"
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+        <HeaderedContentControl Grid.Column="2" Header="Selected Row">
+            <firlibpropgrid:PropertyGrid SelectedObject="{Binding Path=SelectedItem}" />
+        </HeaderedContentControl>
+
+    </Grid>
+</UserControl>
